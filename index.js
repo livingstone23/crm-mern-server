@@ -17,10 +17,14 @@ const server = new ApolloServer({
     resolvers,
     context: ({req}) => {
 
-        //console.log(req.authorization);
+        //console.log('req.authorization LCANO');
+        //console.log(req.headers.authorization);
 
         const token = req.headers['authorization'] || '';
         
+
+        //console.log('token lcano    99');
+        //console.log(token);
         if(token) {
             try {
                 const usuario =  jwt.verify(token.replace('Bearer ',''), process.env.SECRETA);
@@ -30,7 +34,7 @@ const server = new ApolloServer({
                 }
             }
             catch (error) {
-                console.log('Hubo un error');
+                console.log('Hubo un error Server');
                 console.log(error);
             }
         }
